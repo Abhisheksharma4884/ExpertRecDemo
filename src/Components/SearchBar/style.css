@@ -1,0 +1,204 @@
+.dropdown-wrapper{
+    position: absolute;
+    background: white;
+    z-index: 3;
+}
+
+.search-box-container{
+    width: 350px;
+    margin-left: 300px;
+    position: relative;
+    margin-top: 50px;
+}
+
+.search-icon{
+    position: absolute;
+    width: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5px;
+}
+
+.suggestion-list-wrapper{
+    width: 30%;
+    border-right: 1px solid rgb(214, 214, 214);
+    text-align: left;
+}
+
+.product-list-wrapper{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 0 0 0 11px;
+}
+
+.results-wrapper{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.search-suggestion-box{
+    display: flex;
+    height: 438px;
+    width: 778px;
+    padding: 5px 5px 5px 0;
+    box-shadow: 0 12px 24px rgb(0 0 0 / 40%);
+}
+
+.searchBoxInput{
+    width: 100%;
+    padding-right: 24px;
+    font-size: 16px;
+    height: 35px;
+    outline-color: #ffbd45;
+    border: 1px solid lightgray;
+}
+
+.search-box-product-titles{
+    font-family: Prompt;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    color: #333;
+    padding-top: 10px;
+    padding-left: 16px;
+    padding-right: 0;
+    padding-bottom: 4px;
+}
+
+.bold-text{
+    display: inline-block;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.suggestion-list{
+    font-family: Prompt;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 28px;
+    letter-spacing: .03em;
+    color: #666;
+    padding-left: 16px;
+}
+.suggestion-list ::after{
+    display: block;
+    content: '';
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+}
+.suggestion-list.fromLeft:after {
+    transform-origin: 0% 50%;
+}
+
+.text-ellipses{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.search-box-product-main-title {
+    font-family: Prompt;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    color: #333;
+    padding: 12px 0 8px 5px;
+}
+
+.pr1{
+    padding: 5px;
+}
+
+.search-box-product-name {
+    font-family: Prompt;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    color: #333;
+    margin: 0;
+    padding: 6px 0 0 0;
+    text-decoration: underline;
+    text-decoration-color: white;
+}
+
+.price-old {
+    font-size: 14px!important;
+    display: inline-block;
+    text-decoration: inherit;
+    line-height: 20px;
+    color: #000;
+}
+
+.product-price-suggestion-box {
+    font-family: Prompt;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: .03em;
+    color: #1d6bb8;
+}
+
+.oldPriceBeforeDiscount {
+    text-decoration-line: line-through;
+    font-size: 18px;
+}
+
+.price-strike {
+    font-size: 12px;
+    margin-left: 8px;
+    color: #999595;
+}
+
+.suggestion-highlight:hover{
+    background-color: #ffbd45;
+    color: black;
+}
+
+@media (max-width: 420px){
+    .search-box-container{
+        width: 100%;
+        margin: 0 2px;
+        position: relative;
+        margin-top: 5px;
+    }
+
+    .top-collection-wrapper{
+        display: none;
+    }
+
+    .search-suggestion-box{
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+        padding: 5px 5px 5px 0;
+        box-shadow: 0 12px 24px rgb(0 0 0 / 40%);
+    }
+
+    .suggestion-list-wrapper{
+        width: 98%;
+        border-right: none;
+    }
+
+    .search-box-product-titles{
+        display: none;
+    }
+
+    .product-list-wrapper{
+        width: 98%;
+    }
+}
