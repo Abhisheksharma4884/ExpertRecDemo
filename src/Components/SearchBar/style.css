@@ -50,6 +50,7 @@
 .searchBoxInput{
     width: 100%;
     padding-right: 24px;
+    padding-left: 5px;
     font-size: 16px;
     height: 35px;
     outline-color: #ffbd45;
@@ -117,6 +118,10 @@
 
 .pr1{
     padding: 5px;
+}
+.pr1:hover{
+    padding: 4px;
+    transition: padding 0.5s;
 }
 
 .search-box-product-name {
