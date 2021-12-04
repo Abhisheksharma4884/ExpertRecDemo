@@ -114,19 +114,19 @@ function SearchBar() {
     const getFlag = (country) => {
         let flagUrl;
         switch (country) {
-            case "ITALIAN COLLECTION": flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/italiandesk.png';
+            case "Italian Collection": flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/italiandesk.png';
                 break;
-            case "AMERICAN COLLECTION": flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/americandesk.png';
+            case "American Collection": flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/americandesk.png';
                 break;
-            case "MALAYSIAN COLLECTION": flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/malaysiandesk.png';
+            case "Malaysian Collection": flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/malaysiandesk.png';
                 break;
-            case "TURKISH COLLECTION": flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/turkishdesk.png';
+            case "Turkish Collection": flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/turkishdesk.png';
                 break;
-            case "EMPEROR COLLECTION": flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/emperordesk.png';
+            case "Emperor Collection": flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/emperordesk.png';
                 break;
-            case "GERMAN COLLECTION": flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/germandesk.png';
+            case "German Collection": flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/germandesk.png';
                 break;
-            case "VIETNAM COLLECTION": flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/vietnamdesk.png';
+            case "Vietnam Collection": flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/vietnamdesk.png';
                 break;
             default: flagUrl = 'https://www.royaloakindia.com/royaloak-react/public/react-images/pdpFlagsDesk/americandesk.png';
                 break;
@@ -143,6 +143,7 @@ function SearchBar() {
                         value={Query}
                         onChange={e => handleChange(e)}
                         className="searchBoxInput"
+                        placeholder="Find your furniture..."
                     />
                     <img alt="searchIcon" className="search-icon" src="https://www.royaloakindia.com/royaloak-react/public/react-images/iconSearch.webp" />
                 </div>
@@ -153,9 +154,9 @@ function SearchBar() {
                                 <div className="search-box-product-titles">
                                     TOP SEARCHES
                                 </div>
-                                {Suggestions?.map(item => {
+                                {Suggestions?.map((item, index) => {
                                     return (
-                                        <div onMouseOver={e => handleSuggestionHover(e, item.suggestion)} className="suggestion-list suggestion-highlight from-left text-ellipses">
+                                        <div key={index} onMouseOver={e => handleSuggestionHover(e, item.suggestion)} className="suggestion-list suggestion-highlight from-left text-ellipses">
                                             {parse(item.suggestion?.replace(Query, `<span className="bold-text">${Query}</span>`))}
                                         </div>
                                     )
@@ -164,9 +165,9 @@ function SearchBar() {
                                     <div className="search-box-product-titles">
                                         TOP COLLECTION
                                     </div>
-                                    {Collections.map(collection => {
+                                    {Collections.map((collection, index) => {
                                         return (
-                                            <div onMouseOver={e => handleSuggestionHover(e, collection.name + " " + Query)} className="suggestion-list suggestion-highlight from-left text-ellipses">
+                                            <div key={index} onMouseOver={e => handleSuggestionHover(e, collection.name + " " + Query)} className="suggestion-list suggestion-highlight from-left text-ellipses">
                                                 <img alt="countryImage" src={getFlag(collection.name)}
                                                     width="20" height="14" />
                                                 <span style={{ paddingLeft: "8px" }}>
@@ -182,9 +183,9 @@ function SearchBar() {
                                     Popular Products in ' {Lquery} '
                                 </div>
                                 <div className="results-wrapper">
-                                    {Results?.map((result) => {
+                                    {Results?.map((result, index) => {
                                         return (
-                                            <div className="pr1" style={{ width: "33.33%" }}>
+                                            <div key={index} className="pr1" style={{ width: "33.33%" }}>
                                                 <a rel="noreferrer" href="https://www.royaloakindia.com/product/venice-italian-fabric-sofa-3s" target="_blank" title={result.productname} itemProp="url">
                                                     <img alt="productImage" src={result.productimage} itemProp="image" style={{ width: "100%", height: "110px", objectFit: "fill" }} />
                                                     <div>
