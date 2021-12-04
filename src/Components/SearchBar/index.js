@@ -14,41 +14,41 @@ function SearchBar() {
 
     const [Collections, setCollections] = useState([
         {
-          "count": 46,
-          "name": "Italian Collection",
-          "selected": false
+            "count": 46,
+            "name": "Italian Collection",
+            "selected": false
         },
         {
-          "count": 39,
-          "name": "American Collection",
-          "selected": false
+            "count": 39,
+            "name": "American Collection",
+            "selected": false
         },
         {
-          "count": 35,
-          "name": "Malaysian Collection",
-          "selected": false
+            "count": 35,
+            "name": "Malaysian Collection",
+            "selected": false
         },
         {
-          "count": 10,
-          "name": "Turkish Collection",
-          "selected": false
+            "count": 10,
+            "name": "Turkish Collection",
+            "selected": false
         },
         {
-          "count": 9,
-          "name": "Emperor Collection",
-          "selected": false
+            "count": 9,
+            "name": "Emperor Collection",
+            "selected": false
         },
         {
-          "count": 9,
-          "name": "German Collection",
-          "selected": false
+            "count": 9,
+            "name": "German Collection",
+            "selected": false
         },
         {
-          "count": 8,
-          "name": "Vietnam Collection",
-          "selected": false
+            "count": 8,
+            "name": "Vietnam Collection",
+            "selected": false
         }
-      ])
+    ])
 
     const initialQueryRef = useRef(true);
     const onBlurRef = useRef(null);
@@ -68,14 +68,14 @@ function SearchBar() {
 
     useEffect(() => {
         if (!initialQueryRef.current) {
-            if(Query.length){
+            if (Query.length) {
                 const timeoutId = setTimeout(() => {
                     getSuggestions(Query);
                 }, 250);
-    
+
                 return () => clearTimeout(timeoutId);
             }
-            else{
+            else {
                 setShowDropdown(false);
             }
         }
@@ -136,7 +136,7 @@ function SearchBar() {
 
     return (
         <>
-            <div style={{ width: "350px", margin: "0 auto", position: "relative", marginTop: "50px" }}>
+            <div className="search-box-container">
                 <div style={{ position: "relative" }}>
                     <input
                         type="text"
@@ -144,42 +144,44 @@ function SearchBar() {
                         onChange={e => handleChange(e)}
                         className="searchBoxInput"
                     />
-                    <img alt="searchIcon" style={{ position: "absolute", width: "18px", top: "50%", transform: "translateY(-50%)", right: "5px" }} src="https://www.royaloakindia.com/royaloak-react/public/react-images/iconSearch.webp" />
+                    <img alt="searchIcon" className="search-icon" src="https://www.royaloakindia.com/royaloak-react/public/react-images/iconSearch.webp" />
                 </div>
                 {ShowDropdown ?
                     <div className="dropdown-wrapper" ref={onBlurRef}>
                         <div className="search-suggestion-box">
-                            <div className="" style={{ width:"30%", borderRight: "1px solid rgb(214,214,214)", textAlign: "left" }}>
+                            <div className="suggestion-list-wrapper">
                                 <div className="search-box-product-titles">
                                     TOP SEARCHES
                                 </div>
                                 {Suggestions?.map(item => {
                                     return (
-                                        <div onMouseOver={e => handleSuggestionHover(e, item.suggestion)} className="suggestion-list from-left text-ellipses">
+                                        <div onMouseOver={e => handleSuggestionHover(e, item.suggestion)} className="suggestion-list suggestion-highlight from-left text-ellipses">
                                             {parse(item.suggestion?.replace(Query, `<span className="bold-text">${Query}</span>`))}
                                         </div>
                                     )
                                 })}
-                                <div className="search-box-product-titles">
-                                    TOP COLLECTION
+                                <div className="top-collection-wrapper">
+                                    <div className="search-box-product-titles">
+                                        TOP COLLECTION
+                                    </div>
+                                    {Collections.map(collection => {
+                                        return (
+                                            <div onMouseOver={e => handleSuggestionHover(e, collection.name + " " + Query)} className="suggestion-list suggestion-highlight from-left text-ellipses">
+                                                <img alt="countryImage" src={getFlag(collection.name)}
+                                                    width="20" height="14" />
+                                                <span style={{ paddingLeft: "8px" }}>
+                                                    {collection.name}
+                                                </span>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
-                                {Collections.map(collection => {
-                                    return (
-                                        <div onMouseOver={e => handleSuggestionHover(e, collection.name + " " + Query)} className="suggestion-list from-left text-ellipses">
-                                            <img alt="countryImage" src={getFlag(collection.name)}
-                                                width="20" height="14" />
-                                            <span style={{ paddingLeft: "8px" }}>
-                                                {collection.name}
-                                            </span>
-                                        </div>
-                                    )
-                                })}
                             </div>
-                            <div className="" style={{ width:"70%", textAlign: "left", display: "flex", flexDirection: "column", padding: "0 0 0 11px" }}>
+                            <div className="product-list-wrapper">
                                 <div className="search-box-product-main-title">
                                     Popular Products in ' {Lquery} '
                                 </div>
-                                <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+                                <div className="results-wrapper">
                                     {Results?.map((result) => {
                                         return (
                                             <div className="pr1" style={{ width: "33.33%" }}>
