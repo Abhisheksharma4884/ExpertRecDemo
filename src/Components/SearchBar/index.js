@@ -12,15 +12,72 @@ function SearchBar() {
     const [Lquery, setLquery] = useState("");
     const [ShowDropdown, setShowDropdown] = useState(false);
 
+    const [Collections, setCollections] = useState([
+        {
+          "count": 46,
+          "name": "Italian Collection",
+          "selected": false
+        },
+        {
+          "count": 39,
+          "name": "American Collection",
+          "selected": false
+        },
+        {
+          "count": 35,
+          "name": "Malaysian Collection",
+          "selected": false
+        },
+        {
+          "count": 10,
+          "name": "Turkish Collection",
+          "selected": false
+        },
+        {
+          "count": 9,
+          "name": "Emperor Collection",
+          "selected": false
+        },
+        {
+          "count": 9,
+          "name": "German Collection",
+          "selected": false
+        },
+        {
+          "count": 8,
+          "name": "Vietnam Collection",
+          "selected": false
+        }
+      ])
+
     const initialQueryRef = useRef(true);
+    const onBlurRef = useRef(null);
 
     useEffect(() => {
-        if (!initialQueryRef.current && Query.length) {
-            const timeoutId = setTimeout(() => {
-                getSuggestions(Query);
-            }, 250);
+        function handleClickOutside(event) {
+            if (onBlurRef.current && !onBlurRef.current.contains(event.target)) {
+                setShowDropdown(false);
+            }
+        }
 
-            return () => clearTimeout(timeoutId);
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [onBlurRef]);
+
+    useEffect(() => {
+        if (!initialQueryRef.current) {
+            if(Query.length){
+                const timeoutId = setTimeout(() => {
+                    getSuggestions(Query);
+                }, 250);
+    
+                return () => clearTimeout(timeoutId);
+            }
+            else{
+                setShowDropdown(false);
+            }
         }
         else {
             initialQueryRef.current = false;
@@ -90,9 +147,9 @@ function SearchBar() {
                     <img alt="searchIcon" style={{ position: "absolute", width: "18px", top: "50%", transform: "translateY(-50%)", right: "5px" }} src="https://www.royaloakindia.com/royaloak-react/public/react-images/iconSearch.webp" />
                 </div>
                 {ShowDropdown ?
-                    <div className="dropdown-wrapper">
+                    <div className="dropdown-wrapper" ref={onBlurRef}>
                         <div className="search-suggestion-box">
-                            <div className="" style={{ borderRight: "1px solid rgb(214,214,214)", textAlign: "left" }}>
+                            <div className="" style={{ width:"30%", borderRight: "1px solid rgb(214,214,214)", textAlign: "left" }}>
                                 <div className="search-box-product-titles">
                                     TOP SEARCHES
                                 </div>
@@ -106,9 +163,9 @@ function SearchBar() {
                                 <div className="search-box-product-titles">
                                     TOP COLLECTION
                                 </div>
-                                {Facets?.collectionname?.map(collection => {
+                                {Collections.map(collection => {
                                     return (
-                                        <div onMouseOver={e => handleSuggestionHover(e, collection.name + " " + Query.toUpperCase())} className="suggestion-list from-left text-ellipses">
+                                        <div onMouseOver={e => handleSuggestionHover(e, collection.name + " " + Query)} className="suggestion-list from-left text-ellipses">
                                             <img alt="countryImage" src={getFlag(collection.name)}
                                                 width="20" height="14" />
                                             <span style={{ paddingLeft: "8px" }}>
@@ -118,7 +175,7 @@ function SearchBar() {
                                     )
                                 })}
                             </div>
-                            <div className="" style={{ textAlign: "left", display: "flex", flexDirection: "column", width: "100%", padding: "0 0 0 11px" }}>
+                            <div className="" style={{ width:"70%", textAlign: "left", display: "flex", flexDirection: "column", padding: "0 0 0 11px" }}>
                                 <div className="search-box-product-main-title">
                                     Popular Products in ' {Lquery} '
                                 </div>
